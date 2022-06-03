@@ -1,0 +1,53 @@
+<launch>
+<!-- Arguments in Gazebo launch files: -->
+<!-- Start the simulation unpaused: -->
+  <arg name="paused" value="false"/>
+<!-- Use the simulation time: -->
+  <arg name="use_sim_time" value="true"/>
+<!-- Launch with the Gazebo Graphical User Interface: -->
+  <arg name="gui" value="true"/>
+<!-- Launch the simulation without recording: -->
+  <arg name="recording" value="false"/>
+<!-- Start Gazebo server in debug mode: -->
+  <arg name="debug" default="false"/>
+<!-- Find the Stintboat URDF file in the stintboat_description package -->
+  <arg name="urdf" default="$(find stintboat_description)/urdf/stintboat.urdf"/>
+<!-- Find .rviz file -->
+  <arg name="rvizconfig" default="$(find stintboat_description)/config/stintboat.rviz"/>
+<!-- Launch the example course world from VRX: -->
+  <arg name="world" default="$(find vrx_gazebo)/worlds/example_course.world"/>
+<!-- Stintboat model initial coordinates: -->
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.0"/>
+  <arg name="P" default="0.0"/>
+  <arg name="R" default="0.0"/>
+  <arg name="Y" default="0.0"/>
+<!-- Gazebo launcher: -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="debug" value="$(arg debug)"/>
+      <arg name="world_name" value="$(arg world)"/>
+  </include>
+<!-- Stintboat robot spawner: -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+        args="-x $(arg x) -y $(arg y) -z $(arg z)
+              -R $(arg R) -P $(arg P) -Y $(arg Y) -unpause -urdf -model stintboat -param robot_description" respawn="false" output="screen"/>
+<!-- Stintboat description parameters: -->
+  <param name="robot_description" command="$(find xacro)/xacro $(arg urdf)"/>
+  <rosparam command="load"
+            file="$(find stintboat_description)/config/joints.yaml"/>
+<!-- RVIZ arguments: -->
+<!-- RVIZ launcher: -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)"/>
+<!-- Dynamic joints transform publisher: -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <remap from="joint_states" to="stintboat/joint_states"/>
+  </node>
+<!-- Static joints transform publisher: -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+    <remap from="joint_states" to="stintboat/joint_states"/>
+  </node>
+<!-- Stintboat spawner controller: -->
+  <node name="boat_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/stintboat" 
+        args="joint_state_controller sail_controller rudder_controller"/>
+</launch>
