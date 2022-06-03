@@ -25,14 +25,17 @@ The VRX simulation environment has 2 main contributions. First, the example_cour
 
 After the VRX simulation environment and the avaliable packages have been setup in the corresponding catkin workspace, the simulation can be run using the following commands in the terminal: 
 
-source ~/catkin_ws/devel/setup.bash
-roslaunch stintboat_description gazebo.launch
+$ source ~/catkin_ws/devel/setup.bash
+
+$ roslaunch stintboat_description gazebo.launch
 
 Both RVIZ and Gazebo should open and display the model: 
 
 ![rviz](https://user-images.githubusercontent.com/90019998/171939609-bb5bd0ca-7dfe-43f2-bf96-61ffe8c39657.png)
 
 ![gazebo](https://user-images.githubusercontent.com/90019998/171939867-71581a12-8176-4623-bd23-03d77d38dcd6.png)
+
+Whilñe the stintboat_description package is mostly finished, the stintboat_control package is still in active development. 
 
 # Contacts
 
