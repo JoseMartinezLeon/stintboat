@@ -39,14 +39,16 @@
 <!-- RVIZ arguments: -->
 <!-- RVIZ launcher: -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)"/>
-<!-- Dynamic joints transform publisher: -->
+<!-- Joint State Publisher: -->
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
     <remap from="joint_states" to="stintboat/joint_states"/>
   </node>
-<!-- Static joints transform publisher: -->
+<!-- Robot State Publisher: -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
     <remap from="joint_states" to="stintboat/joint_states"/>
   </node>
+<!-- OPTIONAL: joint_state_publisher_gui in RVIZ: -->
+<!--  <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui" output="screen"/> -->
 <!-- Stintboat spawner controller: -->
   <node name="boat_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/stintboat" 
         args="joint_state_controller sail_controller rudder_controller"/>
