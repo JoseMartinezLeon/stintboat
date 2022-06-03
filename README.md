@@ -35,7 +35,7 @@ Both RVIZ and Gazebo should open and display the model:
 
 ![gazebo](https://user-images.githubusercontent.com/90019998/171939867-71581a12-8176-4623-bd23-03d77d38dcd6.png)
 
-Whilñe the stintboat_description package is mostly finished, the stintboat_control package is still in active development. 
+While the stintboat_description package is mostly finished and can be run without issues, the stintboat_control package is still being worked on. 
 
 # Contacts
 
