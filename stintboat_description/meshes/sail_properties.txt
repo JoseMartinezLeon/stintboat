@@ -1,0 +1,37 @@
+Properties obtained from Fusion360
+
+Bodies (1)
+Area	0.954 m^2
+Density	1430.00 kg / m^3
+Mass	24.592 kg
+Volume	0.017 m^3
+Physical Material	CFRP
+Appearance	Carbon Fiber - Plain
+
+Bounding Box
+	Length 	 0.40 m
+	Width 	 0.072 m
+	Height 	 1.00 m
+Center of Mass	0.893 m, 0.00 m, 1.30 m
+
+Moment of Inertia at Center of Mass   (kg m^2)
+	Ixx = 12.769
+	Ixy = 0.00
+	Ixz = -22.048
+	Iyx = 0.00
+	Iyy = 31.181
+	Iyz = 0.00
+	Izx = -22.048
+	Izy = 0.00
+	Izz = 18.426
+
+Moment of Inertia at Origin   (kg m^2)
+	Ixx = 43.617
+	Ixy = 0.00
+	Ixz = -28.541
+	Iyx = 0.00
+	Iyy = 63.396
+	Iyz = 0.00
+	Izx = -28.541
+	Izy = 0.00
+	Izz = 19.793

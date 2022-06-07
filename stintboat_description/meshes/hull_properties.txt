@@ -1,0 +1,37 @@
+Hull properties obtained from Fusion 360
+
+Bodies (1)
+Area	3.674 m^2
+Density	1430.00 kg / m^3
+Mass	204.161 kg
+Volume	0.143 m^3
+Physical Material	CFRP
+Appearance	3D Mahogany - Painted
+
+Bounding Box
+	Length 	 2.001 m
+	Width 	 0.63 m
+	Height 	 0.62 m
+Center of Mass	0.834 m, 1.848E-05 m, 0.432 m
+
+Moment of Inertia at Center of Mass   (kg m^2)
+	Ixx = 6.489
+	Ixy = -0.002
+	Ixz = 0.793
+	Iyx = -0.002
+	Iyy = 43.15
+	Iyz = 0.00
+	Izx = 0.793
+	Izy = 0.00
+	Izz = 47.153
+
+Moment of Inertia at Origin   (kg m^2)
+	Ixx = 44.677
+	Ixy = -0.005
+	Ixz = -72.877
+	Iyx = -0.005
+	Iyy = 223.462
+	Iyz = -0.002
+	Izx = -72.877
+	Izy = -0.002
+	Izz = 189.277
