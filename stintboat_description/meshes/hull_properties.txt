@@ -1,4 +1,4 @@
-Hull properties obtained from Fusion 360
+Properties obtained from Fusion 360
 
 Bodies (1)
 Area	3.674 m^2
