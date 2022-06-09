@@ -68,8 +68,8 @@
 <!-- Pole -->
   <link name="pole_link">
     <inertial>
-      <mass value="0.2"/>
-      <inertia ixx="0.0174" ixy="0.0" ixz="0.0" iyy="0.04834" iyz="0.0" izz="0.20834"/>
+      <mass value="0.042"/>
+       <inertia ixx="0.0174" ixy="0.0" ixz="0.0" iyy="0.04834" iyz="0.0" izz="0.20834"/>
     </inertial>
     <visual>
       <geometry>
@@ -88,7 +88,7 @@
 <!-- Rudder -->
   <link name="rudder_link">
     <inertial>
-      <mass value="0.2"/>
+      <mass value="0.691"/>
       <inertia ixx="0.0435" ixy="0.0" ixz="0.0" iyy="0.012085" iyz="0.0" izz="0.05285"/>
     </inertial>
     <visual>
@@ -103,6 +103,26 @@
       </geometry>
       <origin xyz="0.00175 0 0.0030"/>
     </collision>
+  </link>
+<!-- Camera link -->
+  <link name="camera_link">
+    <collision>
+      <origin xyz="0.00999 0 0.0182"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.00999 0 0.0182" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0.00999 0 0.0182" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
   </link>
 
 <!-- LINK MATERIALS -->
@@ -124,6 +144,10 @@
 
   <gazebo reference="rudder_link">
     <material>Gazebo/White</material>
+  </gazebo>
+
+    <gazebo reference="camera_link">
+    <material>Gazebo/Black</material>
   </gazebo>
 
 <!-- JOINTS -->
@@ -162,6 +186,13 @@
     <origin xyz="0.00175 0 0.0050"/>
   </joint>
 
+  <joint name="camera_joint" type="fixed">
+    <axis xyz="0.0 1.0 0.0" />
+    <origin xyz="0.999 0 1.82" rpy="0 0 0"/>
+    <parent link="mast_link"/>
+    <child link="camera_link"/>
+  </joint>
+
 <!-- TRANSMISSION ELEMENTS -->
 <!-- Based on format described in: https://wiki.ros.org/urdf/XML/Transmission -->
   <transmission name="sail_trans">
@@ -184,6 +215,45 @@
     </actuator>
   </transmission>
 
+<!-- SENSORS -->
+<!-- Camera -->
+  <gazebo reference="camera_link">
+    <sensor type="camera" name="camera1">
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>1920</width>
+          <height>1080</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>stintboat/camera</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
 <!-- PLUGINS -->
 <!-- Plugin: gazebo_ros_control  -->
 <!-- Based on format described in: https://github.com/ros-simulation/gazebo_ros_pkgs  -->
@@ -199,12 +269,12 @@
       <bodyName>base_link</bodyName>
       <waterLevel>-0.2</waterLevel>
       <waterDensity>997.8</waterDensity>
-<!-- Added mass -->
+<!-- Added mass (default values) -->
       <xDotU>0.0</xDotU>
       <yDotV>0.0</yDotV>
       <nDotR>0.0</nDotR>
-<!-- Linear and quadratic drag -->
-      <xU>51.3</xU>
+<!-- Linear and quadratic drag (default values) -->
+      <xU>51.30</xU>
       <xUU>72.4</xUU>
       <yV>40.0</yV>
       <yVV>0.0</yVV>
@@ -213,14 +283,13 @@
       <mQ>50.0</mQ>
       <nR>400.0</nR>
       <nRR>0.0</nRR>
-<!-- General dimensions -->
+<!-- General dimensions (hull radius pending) -->
       <boatArea>3.674</boatArea>
       <hullRadius>0.213</hullRadius>
       <boatWidth>0.63</boatWidth>
       <boatLength>2.001</boatLength>
 <!-- Length discretization, AKA, "N" -->
       <length_n>2</length_n>
-<!-- Wave model -->
       <wave_model>ocean_waves</wave_model>
     </plugin>
   </gazebo>
