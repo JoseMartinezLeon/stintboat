@@ -197,7 +197,7 @@
   <gazebo>
     <plugin filename="libusv_gazebo_dynamics_plugin.so" name="usv_dynamics_wamv_dynamics_plugin">
       <bodyName>base_link</bodyName>
-      <waterLevel>-0.3</waterLevel>
+      <waterLevel>-0.2</waterLevel>
       <waterDensity>997.8</waterDensity>
 <!-- Added mass -->
       <xDotU>0.0</xDotU>
@@ -229,7 +229,7 @@
     <plugin filename="libusv_gazebo_wind_plugin.so" name="wind">
 <!-- models to be effected by the wind -->
       <wind_obj>
-        <name>wamv</name>
+        <name>stintboat</name>
         <link_name>base_link</link_name>
         <coeff_vector>0.5 0.5 0.33</coeff_vector>
       </wind_obj>
@@ -241,7 +241,7 @@
       <var_wind_time_constants>5</var_wind_time_constants>
       <random_seed></random_seed>
 <!-- set to zero/empty to randomize -->
-      <update_rate>10</update_rate>
+      <update_rate>-1</update_rate>
     </plugin>
   </gazebo>
 </robot>
