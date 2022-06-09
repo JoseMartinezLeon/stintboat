@@ -104,23 +104,47 @@
       <origin xyz="0.00175 0 0.0030"/>
     </collision>
   </link>
+
 <!-- Camera link -->
   <link name="camera_link">
     <collision>
-      <origin xyz="0.00999 0 0.0182"/>
+      <origin xyz="0.00999 0.0 0.0182"/>
       <geometry>
         <box size="0.05 0.05 0.05"/>
       </geometry>
     </collision>
     <visual>
-      <origin xyz="0.00999 0 0.0182" rpy="0 0 0"/>
+      <origin xyz="0.00999 0.0 0.0182" rpy="0.0 0.0 0.0"/>
       <geometry>
         <box size="0.05 0.05 0.05"/>
       </geometry>
+      <material name="red"/>
     </visual>
     <inertial>
       <mass value="1e-5" />
-      <origin xyz="0.00999 0 0.0182" rpy="0 0 0"/>
+      <origin xyz="0.00999 0 0.0182" rpy="0.0 0.0 0.0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+<!-- IMU link -->
+  <link name="imu_link">
+    <collision>
+      <origin xyz="0.00800 0.0 0.05"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.00800 0.0 0.05" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <material name="green"/>
+    </visual>
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0.00800 0.0 0.05" rpy="0.0 0.0 0.0"/>
       <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
     </inertial>
   </link>
@@ -146,8 +170,12 @@
     <material>Gazebo/White</material>
   </gazebo>
 
-    <gazebo reference="camera_link">
+  <gazebo reference="camera_link">
     <material>Gazebo/Black</material>
+  </gazebo>
+
+  <gazebo reference="imu_link">
+    <material>Gazebo/Green</material>
   </gazebo>
 
 <!-- JOINTS -->
@@ -187,10 +215,17 @@
   </joint>
 
   <joint name="camera_joint" type="fixed">
-    <axis xyz="0.0 1.0 0.0" />
-    <origin xyz="0.999 0 1.82" rpy="0 0 0"/>
+    <axis xyz="0.0 1.0 0.0"/>
+    <origin xyz="0.999 0.0 1.82"/>
     <parent link="mast_link"/>
     <child link="camera_link"/>
+  </joint>
+
+  <joint name="imu_joint" type="fixed">
+    <axis xyz="1.0 0.0 0.0"/>
+    <origin xyz="0.800 0.0 0.5"/>
+    <parent link="base_link"/>
+    <child link="imu_link"/>
   </joint>
 
 <!-- TRANSMISSION ELEMENTS -->
@@ -251,6 +286,28 @@
         <distortionT1>0.0</distortionT1>
         <distortionT2>0.0</distortionT2>
       </plugin>
+    </sensor>
+  </gazebo>
+
+<!-- IMU -->
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
     </sensor>
   </gazebo>
 
