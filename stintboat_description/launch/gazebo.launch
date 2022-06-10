@@ -32,14 +32,12 @@
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
         args="-x $(arg x) -y $(arg y) -z $(arg z)
               -R $(arg R) -P $(arg P) -Y $(arg Y) -unpause -urdf -model stintboat -param robot_description" respawn="false" output="screen"/>
-<!-- RVIZ arguments: -->
 <!-- RVIZ launcher: -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)"/>
 <!-- Stintboat description parameters: -->
   <param name="robot_description" command="$(find xacro)/xacro $(arg urdf)"/>
 <!-- ros_control_pkg parameters: -->  
-  <rosparam command="load"
-            file="$(find stintboat_description)/config/joints.yaml"/>
+  <rosparam file="$(find stintboat_description)/config/stintboat_control.yaml" command="load"/>
 
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
     <remap from="joint_states" to="stintboat/joint_states"/>
