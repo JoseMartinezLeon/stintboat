@@ -32,24 +32,23 @@
   <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
         args="-x $(arg x) -y $(arg y) -z $(arg z)
               -R $(arg R) -P $(arg P) -Y $(arg Y) -unpause -urdf -model stintboat -param robot_description" respawn="false" output="screen"/>
-<!-- Stintboat description parameters: -->
-  <param name="robot_description" command="$(find xacro)/xacro $(arg urdf)"/>
-  <rosparam command="load"
-            file="$(find stintboat_description)/config/joints.yaml"/>
 <!-- RVIZ arguments: -->
 <!-- RVIZ launcher: -->
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)"/>
-<!-- Joint State Publisher: -->
+<!-- Stintboat description parameters: -->
+  <param name="robot_description" command="$(find xacro)/xacro $(arg urdf)"/>
+<!-- ros_control_pkg parameters: -->  
+  <rosparam command="load"
+            file="$(find stintboat_description)/config/joints.yaml"/>
+
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
     <remap from="joint_states" to="stintboat/joint_states"/>
   </node>
-<!-- Robot State Publisher: -->
+  
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
     <remap from="joint_states" to="stintboat/joint_states"/>
   </node>
-<!-- OPTIONAL: joint_state_publisher_gui in RVIZ: -->
-<!--  <node pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" name="joint_state_publisher_gui" output="screen"/> -->
-<!-- Stintboat spawner controller: -->
-  <node name="boat_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/stintboat" 
+  
+  <node name="stintboat_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/stintboat" 
         args="joint_state_controller sail_controller rudder_controller"/>
 </launch>
