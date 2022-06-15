@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+<robot name="sailboat_materials" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find sailboat_materials_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find sailboat_materials_description)/urdf/sailboat_materials.trans" />
+<xacro:include filename="$(find sailboat_materials_description)/urdf/sailboat_materials.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="0.8343461090897695 1.8476860883908343e-05 0.4324897304587565" rpy="0 0 0"/>
+    <mass value="204.16127141071743"/>
+    <inertia ixx="6.489236" iyy="43.15021" izz="47.153377" ixy="-0.002075" iyz="-0.000481" ixz="0.793396"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://sailboat_materials_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://sailboat_materials_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="mast_link_1">
+  <inertial>
+    <origin xyz="2.220446049250313e-16 -1.4210854715202004e-16 0.6499999999999995" rpy="0 0 0"/>
+    <mass value="1.2864821916450215"/>
+    <inertia ixx="0.181252" iyy="0.181252" izz="0.000145" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.957 -0.0 -0.5" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://sailboat_materials_description/meshes/mast_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.957 -0.0 -0.5" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://sailboat_materials_description/meshes/mast_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="sail_link_1">
+  <inertial>
+    <origin xyz="-0.06425696919906199 4.753731293681053e-17 -0.5000000000000011" rpy="0 0 0"/>
+    <mass value="24.5920972217098"/>
+    <inertia ixx="2.056729" iyy="2.235259" izz="0.193305" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.957 -0.0 -1.8" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://sailboat_materials_description/meshes/sail_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.957 -0.0 -1.8" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://sailboat_materials_description/meshes/sail_link_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="joint1" type="continuous">
+  <origin xyz="0.957 0.0 0.5" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="mast_link_1"/>
+  <axis xyz="0.0 0.0 1.0"/>
+</joint>
+
+<joint name="joint2" type="fixed">
+  <origin xyz="0.0 0.0 1.3" rpy="0 0 0"/>
+  <parent link="mast_link_1"/>
+  <child link="sail_link_1"/>
+</joint>
+
+</robot>
