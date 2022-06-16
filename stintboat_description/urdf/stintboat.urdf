@@ -7,7 +7,7 @@
   <link name="dummy_link">
   </link>
 
-<!-- Hull -->
+<!-- Hull (Material: CFRP) -->
   <link name="base_link">
     <inertial>
       <origin xyz="0.8343461090897695 1.8476860883908343e-05 0.4324897304587565" rpy="0 0 0"/>
@@ -28,12 +28,12 @@
     </collision>
   </link>
 
-<!-- Mast -->
+<!-- Mast (Material: Aluminum) -->
   <link name="mast_link">
     <inertial>
       <origin xyz="2.220446049250313e-16 -1.4210854715202004e-16 0.6499999999999995" rpy="0 0 0"/>
-      <mass value="1.2864"/>
-      <inertia ixx="0.181252" ixy="0.0" ixz="0.0" iyy="0.181252" iyz="0.0" izz="0.000145"/>
+      <mass value="2.481072798172541"/>
+      <inertia ixx="0.349557" ixy="0.0" ixz="0.0" iyy="0.349557" iyz="0.0" izz="0.000279"/>
     </inertial>
     <visual>
       <geometry>
@@ -49,7 +49,7 @@
     </collision>
   </link>
 
-<!-- Sail -->
+<!-- Sail (Material: CFRP) -->
   <link name="sail_link">
     <inertial>
       <origin xyz="-0.06425696919906199 4.753731293681053e-17 -0.5000000000000011" rpy="0 0 0"/>
@@ -70,43 +70,45 @@
     </collision>
   </link>
 
-<!-- Pole -->
+<!-- Pole (Material: Aluminum) -->
   <link name="pole_link">
     <inertial>
-      <mass value="0.042"/>
-       <inertia ixx="0.0174" ixy="0.0" ixz="0.0" iyy="0.04834" iyz="0.0" izz="0.20834"/>
+      <origin xyz="-2.7755575615628914e-17 0.0 -0.25" rpy="0 0 0"/>  
+      <mass value="0.23856469213197484"/>
+      <inertia ixx="0.004973" ixy="0.0" ixz="0.0" iyy="0.004973" iyz="0.0" izz="7e-06"/>
     </inertial>
-    <visual>
+    <visual>  
       <geometry>
         <mesh filename="package://stintboat_description/meshes/pole.dae"/>
-        <origin xyz="0.00175 0 0.0050"/>
       </geometry>
+      <origin xyz="-0.25 -0.0 -0.5" rpy="0 0 0"/>
     </visual>
     <collision>
       <geometry>
         <mesh filename="package://stintboat_description/meshes/pole.dae"/>
-        <origin xyz="0.00175 0 0.0050"/>
+        <origin xyz="-0.25 -0.0 -0.5" rpy="0 0 0"/>
       </geometry>
     </collision>
   </link>
 
-<!-- Rudder -->
+<!-- Rudder (Material:CFRP) -->
   <link name="rudder_link">
     <inertial>
-      <mass value="0.691"/>
-      <inertia ixx="0.0435" ixy="0.0" ixz="0.0" iyy="0.012085" iyz="0.0" izz="0.05285"/>
+      <origin xyz="-0.0571587336123294 4.414970727608667e-17 0.1500000000000002" rpy="0 0 0"/>  
+      <mass value="1.3349130842340802"/>
+      <inertia ixx="0.010058" ixy="0.0" ixz="0.0" iyy="0.012892" iyz="0.0" izz="0.002925"/>
     </inertial>
     <visual>
       <geometry>
         <mesh filename="package://stintboat_description/meshes/rudder.dae"/>
       </geometry>
-      <origin xyz="0.00175 0 0.0030"/>
+      <origin xyz="-0.25 -0.0 -0.0" rpy="0 0 0"/>
     </visual>
     <collision>
       <geometry>
         <mesh filename="package://stintboat_description/meshes/rudder.dae"/>
       </geometry>
-      <origin xyz="0.00175 0 0.0030"/>
+      <origin xyz="-0.25 -0.0 -0.0" rpy="0 0 0"/>
     </collision>
   </link>
 
@@ -207,16 +209,15 @@
   <joint name="base_pole_joint" type="revolute">
     <parent link="base_link"/>
     <child link="pole_link"/>
-    <axis xyz="0.0 0.0 1.8"/>
-    <origin xyz="0.00175 0 0.0050"/>
-    <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+    <axis xyz="0.0 0.0 -1.0"/>
+    <origin xyz="0.25 0.0 0.5" rpy="0.0 0.0 0.0"/>
+    <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/>
   </joint>
 
   <joint name="pole_rudder_joint" type="fixed">
     <parent link="pole_link"/>
     <child link="rudder_link"/>
-    <axis xyz="0.0 0.0 1.0"/>
-    <origin xyz="0.00175 0 0.0050"/>
+    <origin xyz="0.0 0.0 -0.5" rpy="0.0 0.0 0.0"/>
   </joint>
 
   <joint name="camera_joint" type="fixed">
