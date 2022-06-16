@@ -1,9 +1,0 @@
-<launch>
-
-<rosparam file="$(find sailboat_materials_description)/launch/controller.yaml" command="load"/>
-<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="sailboat_materials" args="joint1_position_controller joint_state_controller "/>
-<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
-  <remap from="/joint_states" to="/sailboat_materials/joint_states"/>
-</node>
-
-</launch>
