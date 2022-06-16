@@ -125,7 +125,7 @@
       <geometry>
         <box size="0.05 0.05 0.05"/>
       </geometry>
-      <material name="red"/>
+      <material name="black"/>
     </visual>
     <inertial>
       <mass value="1e-5" />
@@ -147,7 +147,7 @@
       <geometry>
         <box size="0.05 0.05 0.05"/>
       </geometry>
-      <material name="green"/>
+      <material name="black"/>
     </visual>
     <inertial>
       <mass value="1e-5" />
@@ -182,7 +182,7 @@
   </gazebo>
 
   <gazebo reference="imu_link">
-    <material>Gazebo/Green</material>
+    <material>Gazebo/Black</material>
   </gazebo>
 
 <!-- JOINTS -->
