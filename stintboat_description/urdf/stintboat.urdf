@@ -376,7 +376,7 @@
       <update_rate>-1</update_rate>
     </plugin>
   </gazebo>
-  <!-- Gazebo LiftDrag Plugin -->
+<!-- Gazebo LiftDrag Plugin -->
   <gazebo>
     <plugin filename="libLiftDragPlugin.so" name="sail_lift_drag">
       <a0>0.0</a0>
