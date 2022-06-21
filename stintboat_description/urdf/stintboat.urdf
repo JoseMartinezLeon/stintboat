@@ -376,5 +376,25 @@
       <update_rate>-1</update_rate>
     </plugin>
   </gazebo>
+  <!-- Gazebo LiftDrag Plugin -->
+  <gazebo>
+    <plugin filename="libLiftDragPlugin.so" name="sail_lift_drag">
+      <a0>0.0</a0>
+      <alpha_stall>16.5</alpha_stall>
+      <cla>0.0881818</cla>
+      <cla_stall>-0.0800727</cla_stall>
+      <cda>0.00239273</cda>
+      <cda_stall>0.02712336</cda_stall>
+      <cma>0.0</cma>
+      <cma_stall>0.0</cma_stall>
+      <area>0.825</area>
+      <fluid_density>1.225</fluid_density>
+      <forward>1.0 0.0 0.0</forward>
+      <upward>0.0 1.0 0.0</upward>
+      <cp>-0.20 0.0 -0.50</cp>
+      <link_name>sail_link</link_name>
+      <radial_symmetry>false</radial_symmetry>
+    </plugin>
+  </gazebo>
 </robot>
 
