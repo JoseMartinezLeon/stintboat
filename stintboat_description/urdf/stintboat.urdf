@@ -377,6 +377,7 @@
     </plugin>
   </gazebo>
 <!-- Gazebo LiftDrag Plugin -->
+<!--  
   <gazebo>
     <plugin filename="libLiftDragPlugin.so" name="sail_lift_drag">
       <a0>0.0</a0>
@@ -396,5 +397,6 @@
       <radial_symmetry>false</radial_symmetry>
     </plugin>
   </gazebo>
+-->
 </robot>
 
