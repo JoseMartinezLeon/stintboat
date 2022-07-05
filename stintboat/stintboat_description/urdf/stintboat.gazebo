@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<robot>
+    <!-- SENSORS -->
+<!-- Camera -->
+  <gazebo reference="camera_link">
+    <sensor type="camera" name="camera1">
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>1920</width>
+          <height>1080</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.007</stddev>
+        </noise>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>stintboat/camera</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera_link</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+<!-- IMU -->
+  <gazebo reference="imu_link">
+    <gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
+        <bodyName>imu_link</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.0</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>imu_link</frameName>
+        <initialOrientationAsReference>false</initialOrientationAsReference>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+  </gazebo>
+
+<!-- PLUGINS -->
+<!-- Plugin: gazebo_ros_control  -->
+<!-- Based on format described in: https://github.com/ros-simulation/gazebo_ros_pkgs  -->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/stintboat</robotNamespace>
+    </plugin>
+  </gazebo>
+
+<gazebo>
+    <plugin filename="libusv_gazebo_dynamics_plugin.so" name="usv_dynamics_wamv_dynamics_plugin">
+      <bodyName>base_link</bodyName>
+      <waterLevel>-0.2</waterLevel>
+      <waterDensity>997.8</waterDensity>
+<!-- Added mass (default values) -->
+      <xDotU>0.0</xDotU>
+      <yDotV>0.0</yDotV>
+      <nDotR>0.0</nDotR>
+<!-- Linear and quadratic drag (default values) -->
+      <xU>76.3</xU>
+      <xUU>72.4</xUU>
+      <yV>65.0</yV>
+      <yVV>0.0</yVV>
+      <zW>650.0</zW>
+      <kP>75.0</kP>
+      <mQ>75.0</mQ>
+      <nR>550.0</nR>
+<!-- General dimensions (hull radius pending) -->
+      <boatArea>3.674</boatArea>
+      <hullRadius>0.213</hullRadius>
+      <boatWidth>0.63</boatWidth>
+      <boatLength>2.001</boatLength>
+<!-- Length discretization, AKA, "N" -->
+      <length_n>2</length_n>
+      <wave_model>ocean_waves</wave_model>
+    </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin filename="libusv_gazebo_wind_plugin.so" name="wind">
+<!-- models to be effected by the wind -->
+      <wind_obj>
+        <name>stintboat</name>
+        <link_name>base_link</link_name>
+        <coeff_vector>0.5 0.5 0.33</coeff_vector>
+      </wind_obj>
+<!-- Wind -->
+      <wind_direction>270</wind_direction>
+<!-- in degrees -->
+      <wind_mean_velocity>10</wind_mean_velocity>
+      <var_wind_gain_constants>100</var_wind_gain_constants>
+      <var_wind_time_constants>5</var_wind_time_constants>
+      <random_seed></random_seed>
+<!-- set to zero/empty to randomize -->
+      <update_rate>-1</update_rate>
+    </plugin>
+  </gazebo>
+
+  <!-- Gazebo Buoyancy Plugin -->
+<!-- 
+<gazebo>
+    <plugin name="buoyancy" filename="libBuoyancyPlugin.so">
+      <fluid_density>1000</fluid_density>
+    </plugin>
+</gazebo> -->
+
+<!-- Gazebo LiftDrag Plugin -->
+<!--
+    <gazebo>
+        <plugin name="sail_link" filename="libLiftDragPlugin.so">
+          <air_density>1000</air_density>
+          
+          <cla>0.0881818</cla>
+          <cla_stall>-0.0800727</cla_stall>
+          
+          <cda>0.00239273</cda>
+          <cda_stall>0.02712336</cda_stall>
+          
+          <alpha_stall>16.5</alpha_stall>
+          <a0>0.0</a0>
+          
+          <area>0.825</area>
+          <upward>0 1 0</upward>
+          <forward>1 0 0</forward>
+          <link_name>sail_link</link_name>
+          <cp>-0.20 0 -0.5</cp>
+        </plugin>
+    </gazebo> -->
+
+</robot>

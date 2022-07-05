@@ -1,0 +1,42 @@
+<launch>
+
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <!-- Stintboat model initial coordinates: -->
+  <arg name="x" default="-532.0"/>
+  <arg name="y" default="162.0"/>
+  <arg name="z" default="0.0"/>
+  <arg name="P" default="0.0"/>
+  <arg name="R" default="0.0"/>
+  <arg name="Y" default="1.0"/>
+
+  <!-- Launch VRX world -->
+  <arg name="world" default="$(find vrx_gazebo)/worlds/example_course.world"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="world_name" value="$(arg world)"/>    
+  </include>
+
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <param name="robot_description"
+    command="$(find xacro)/xacro --inorder '$(find stintboat_description)/urdf/stintboat.xacro'" />
+
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model"
+          args="-x $(arg x) -y $(arg y) -z $(arg z)
+                -R $(arg R) -P $(arg P) -Y $(arg Y) -urdf -model stintboat -param robot_description" respawn="false" output="screen"/>
+
+  <!-- ros_control rrbot launch file -->
+  <!--include file="$(find rrbot_control)/launch/rrbot_control.launch" /-->
+
+</launch>
