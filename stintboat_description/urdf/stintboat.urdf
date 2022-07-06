@@ -158,11 +158,11 @@
 
 <!-- LINK MATERIALS -->
   <gazebo reference="base_link">
-    <material>Gazebo/Blue</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <gazebo reference="mast_link">
-    <material>Gazebo/Gray</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <gazebo reference="sail_link">
@@ -170,7 +170,7 @@
   </gazebo>
 
   <gazebo reference="pole_link">
-    <material>Gazebo/Gray</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
   <gazebo reference="rudder_link">
@@ -192,12 +192,12 @@
     <child link="base_link"/>
   </joint>
 
-  <joint name="base_mast_joint" type="revolute">
+  <joint name="base_mast_joint" type="continuous">
     <parent link="base_link"/>
     <child link="mast_link"/>
     <axis xyz="0.0 0.0 1.0"/>
     <origin xyz="0.957 0.0 0.5" rpy="0 0 0"/>
-    <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/>
+<!--    <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/> -->
   </joint>
 
   <joint name="mast_sail_joint" type="fixed">
@@ -206,12 +206,12 @@
     <origin xyz="0.0 0.0 1.3" rpy="0 0 0"/>
   </joint>
 
-  <joint name="base_pole_joint" type="revolute">
+  <joint name="base_pole_joint" type="continuous">
     <parent link="base_link"/>
     <child link="pole_link"/>
     <axis xyz="0.0 0.0 -1.0"/>
     <origin xyz="0.25 0.0 0.5" rpy="0.0 0.0 0.0"/>
-    <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/>
+<!--    <limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.5"/> -->
   </joint>
 
   <joint name="pole_rudder_joint" type="fixed">
@@ -239,7 +239,7 @@
   <transmission name="sail_trans">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="base_mast_joint">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="mast_motor">
       <mechanicalReduction>1</mechanicalReduction>
@@ -249,7 +249,7 @@
   <transmission name="rudder_trans">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="base_pole_joint">
-      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
     </joint>
     <actuator name="rudder_motor">
       <mechanicalReduction>1</mechanicalReduction>
@@ -356,47 +356,32 @@
       <wave_model>ocean_waves</wave_model>
     </plugin>
   </gazebo>
-<!--Plugin: usv_gazebo_wind_plugin -->
+
+<!-- Gazebo Buoyancy Plugin -->
   <gazebo>
-    <plugin filename="libusv_gazebo_wind_plugin.so" name="wind">
-<!-- models to be effected by the wind -->
-      <wind_obj>
-        <name>stintboat</name>
-        <link_name>base_link</link_name>
-        <coeff_vector>0.5 0.5 0.33</coeff_vector>
-      </wind_obj>
-<!-- Wind -->
-      <wind_direction>270</wind_direction>
-<!-- in degrees -->
-      <wind_mean_velocity>10</wind_mean_velocity>
-      <var_wind_gain_constants>100</var_wind_gain_constants>
-      <var_wind_time_constants>5</var_wind_time_constants>
-      <random_seed></random_seed>
-<!-- set to zero/empty to randomize -->
-      <update_rate>-1</update_rate>
+    <plugin name="BuoyancyPlugin" filename="libBuoyancyPlugin.so">
+      <fluid_density>1.225</fluid_density>
     </plugin>
   </gazebo>
-<!-- Gazebo LiftDrag Plugin -->
-<!--  
-  <gazebo>
-    <plugin filename="libLiftDragPlugin.so" name="sail_lift_drag">
-      <a0>0.0</a0>
-      <alpha_stall>16.5</alpha_stall>
+<!-- Gazebo Lift Drag Plugin -->
+<!-- <gazebo>
+    <plugin name="LiftDragPlugin" filename="libLiftDragPlugin.so">
+      <air_density>1.225</air_density>
+
       <cla>0.0881818</cla>
       <cla_stall>-0.0800727</cla_stall>
+
       <cda>0.00239273</cda>
       <cda_stall>0.02712336</cda_stall>
-      <cma>0.0</cma>
-      <cma_stall>0.0</cma_stall>
-      <area>0.825</area>
-      <fluid_density>1.225</fluid_density>
-      <forward>1.0 0.0 0.0</forward>
-      <upward>0.0 1.0 0.0</upward>
-      <cp>-0.20 0.0 -0.50</cp>
-      <link_name>sail_link</link_name>
-      <radial_symmetry>false</radial_symmetry>
-    </plugin>
-  </gazebo>
--->
-</robot>
 
+      <alpha_stall>16.5</alpha_stall>
+      <a0>0.0</a0>
+
+      <area>0.825</area>
+      <upward>0.0 1.0 0.0</upward>
+      <forward>1.0 0.0 0.0</forward>
+      <link_name>sail_link</link_name>
+      <cp>-0.20 0.0 -0.50</cp>
+    </plugin>
+  </gazebo> -->
+</robot>
