@@ -1,7 +1,0 @@
-<launch>
-
-  <!-- Load RQT with a pre-setup GUI for Stintboat controls from a perspective file  -->
-  <node name="stintboat_rqt" pkg="rqt_gui" type="rqt_gui" respawn="false"
-	output="screen" args="--perspective-file $(find stintboat_control)/launch/stintboat_rqt.perspective"/>
-
-</launch>
