@@ -53,8 +53,8 @@
   <link name="sail_link">
     <inertial>
       <origin xyz="-0.06425696919906199 4.753731293681053e-17 -0.5000000000000011" rpy="0 0 0"/>
-      <mass value="24.592097"/>
-      <inertia ixx="2.056729" ixy="0.0" ixz="0.0" iyy="2.235259" iyz="0.0" izz="0.193305"/>
+      <mass value="17.799"/>
+      <inertia ixx="1.486" ixy="0.0" ixz="0.0" iyy="1.644" iyz="0.0" izz="0.164"/>
     </inertial>
     <visual>
       <geometry>
