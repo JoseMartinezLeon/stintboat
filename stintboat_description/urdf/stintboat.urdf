@@ -95,8 +95,8 @@
   <link name="rudder_link">
     <inertial>
       <origin xyz="-0.0571587336123294 4.414970727608667e-17 0.1500000000000002" rpy="0 0 0"/>  
-      <mass value="1.3349130842340802"/>
-      <inertia ixx="0.010058" ixy="0.0" ixz="0.0" iyy="0.012892" iyz="0.0" izz="0.002925"/>
+      <mass value="0.481"/>
+      <inertia ixx="0.004" ixy="0.0" ixz="0.0" iyy="0.04" iyz="0.0" izz="0.0"/>
     </inertial>
     <visual>
       <geometry>
