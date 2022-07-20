@@ -1,0 +1,317 @@
+<?xml version="1.0"?>
+<robot name="cubo">
+
+<!-- LINKS -->
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.0 -1.4387415876218923e-16 0.6802331218289486" rpy="0 0 0"/>
+      <mass value="8130.307511653398"/>
+      <inertia ixx="1421.174701" 
+               iyy="1424.106222" 
+               izz="1357.982772" 
+               ixy="-0.0" 
+               iyz="-0.0" 
+               ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/base_link.stl"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/base_link.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="axis1_link_1">
+    <inertial>
+      <origin xyz="0.0 0.5 0.0" rpy="0 0 0"/>
+      <mass value="86.31525815737957"/>
+      <inertia ixx="14.152106" 
+               iyy="0.107894" 
+               izz="14.152106" 
+               ixy="0.0" 
+               iyz="0.0" 
+               ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.3 0.5 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/axis1_link_1.stl"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="0.3 0.5 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/axis1_link_1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="axis2_link_1">
+    <inertial>
+      <origin xyz="0.0 0.5 0.0" rpy="0 0 0"/>
+      <mass value="86.31525815737956"/>
+      <inertia ixx="14.152106" 
+               iyy="0.107894" 
+               izz="14.152106" 
+               ixy="0.0" 
+               iyz="0.0" 
+               ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.3 0.5 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/axis2_link_1.stl"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.3 0.5 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/axis2_link_1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wheel1_link_1">
+    <inertial>
+      <origin xyz="-5.551115123125783e-17 0.07500000000000007 2.7755575615628914e-17" rpy="0 0 0"/>
+      <mass value="73.98450699203963"/>
+      <inertia ixx="0.601124" iyy="0.924806" izz="0.601124" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.3 0.7 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/wheel1_link_1.stl"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="0.3 0.7 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/wheel1_link_1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wheel2_link_1">
+    <inertial>
+      <origin xyz="5.551115123125783e-17 0.07499999999999984 2.7755575615628914e-17" rpy="0 0 0"/>
+      <mass value="73.98450699203961"/>
+      <inertia ixx="0.601124" 
+               iyy="0.924806" 
+               izz="0.601124" 
+               ixy="-0.0" 
+               iyz="-0.0" 
+               ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.3 0.7 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/wheel2_link_1.stl"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.3 0.7 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/wheel2_link_1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wheel3_link_1">
+    <inertial>
+      <origin xyz="0.0 -0.07499999999999984 2.7755575615628914e-17" rpy="0 0 0"/>
+      <mass value="73.98450699203961"/>
+      <inertia ixx="0.601124" 
+               iyy="0.924806" 
+               izz="0.601124" 
+               ixy="0.0" 
+               iyz="-0.0" 
+               ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.3 -0.7 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/wheel3_link_1.stl"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="0.3 -0.7 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/wheel3_link_1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wheel4_link_1">
+    <inertial>
+      <origin xyz="5.551115123125783e-17 -0.07500000000000007 2.7755575615628914e-17" rpy="0 0 0"/>
+      <mass value="73.98450699203963"/>
+      <inertia ixx="0.601124" iyy="0.924806" izz="0.601124" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.3 -0.7 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/wheel4_link_1.stl"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.3 -0.7 -0.15" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/wheel4_link_1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="mast_link_1">
+    <inertial>
+      <origin xyz="0.0 0.0 0.6500000000000001" rpy="0 0 0"/>
+      <mass value="7.213489431723865"/>
+      <inertia ixx="1.016306" 
+               iyy="1.016306" 
+               izz="0.000812" 
+               ixy="0.0" 
+               iyz="0.0" 
+               ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.0 -0.0 -1.2" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/mast_link_1.stl"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.0 -0.0 -1.2" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/mast_link_1.stl"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="sail_link_1">
+    <inertial>
+      <origin xyz="0.11414344795479987 -5.0741241850164775e-15 -0.5000000000000375" rpy="0 0 0"/>
+      <mass value="21.036380800122238"/>
+      <inertia ixx="1.757501" iyy="2.044229" izz="0.295667" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.0 -0.0 -2.5" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/sail_link_1.stl"/>
+      </geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.0 -0.0 -2.5" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://cubo_description/meshes/sail_link_1.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+<!-- JOINTS -->
+
+  <joint name="revolute1_joint" type="continuous">
+    <origin xyz="-0.3 -0.5 0.15" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="axis1_link_1"/>
+    <axis xyz="0.0 1.0 0.0"/>
+  </joint>
+
+  <joint name="revolute2_joint" type="continuous">
+    <origin xyz="0.3 -0.5 0.15" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="axis2_link_1"/>
+    <axis xyz="0.0 1.0 0.0"/>
+  </joint>
+
+  <joint name="wheel1_joint" type="fixed">
+    <origin xyz="0.0 -0.2 0.0" rpy="0 0 0"/>
+    <parent link="axis1_link_1"/>
+    <child link="wheel1_link_1"/>
+  </joint>
+
+  <joint name="wheel2_joint" type="fixed">
+    <origin xyz="0.0 -0.2 0.0" rpy="0 0 0"/>
+    <parent link="axis2_link_1"/>
+    <child link="wheel2_link_1"/>
+  </joint>
+
+  <joint name="wheel3_joint" type="fixed">
+    <origin xyz="0.0 1.2 0.0" rpy="0 0 0"/>
+    <parent link="axis1_link_1"/>
+    <child link="wheel3_link_1"/>
+  </joint>
+
+  <joint name="wheel4_joint" type="fixed">
+    <origin xyz="0.0 1.2 0.0" rpy="0 0 0"/>
+    <parent link="axis2_link_1"/>
+    <child link="wheel4_link_1"/>
+  </joint>
+
+  <joint name="base_mast_joint" type="fixed">
+    <origin xyz="0.0 0.0 1.2" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="mast_link_1"/>
+  </joint>
+
+  <joint name="mast_sail_joint" type="continuous">
+    <origin xyz="0.0 0.0 1.3" rpy="0 0 0"/>
+    <parent link="mast_link_1"/>
+    <child link="sail_link_1"/>
+    <axis xyz="0.0 0.0 1.0"/>
+  </joint>
+
+<!-- PLUGINS -->
+
+  <gazebo>
+      <plugin name="BuoyancyPlugin" filename="libBuoyancyPlugin.so">
+        <fluid_density>1.225</fluid_density>
+      </plugin>
+  </gazebo>
+
+<!-- Gazebo Lift Drag Plugin -->
+ <gazebo>
+    <plugin name="LiftDragPlugin" filename="libLiftDragPlugin.so">
+      <air_density>1.225</air_density>
+      <cla>0.0881818</cla>
+      <cla_stall>-0.0800727</cla_stall>
+      <cda>0.00239273</cda>
+      <cda_stall>0.02712336</cda_stall>
+      <alpha_stall>16.5</alpha_stall>
+      <a0>0.0</a0>
+      <area>0.825</area>
+      <upward>0.0 1.0 0.0</upward>
+      <forward>1.0 0.0 0.0</forward>
+      <link_name>sail_link_1</link_name>
+      <cp>-0.20 0.0 -0.50</cp>
+    </plugin>
+  </gazebo>
+
+<!-- Gazebo Force/Joint sensor -->
+<!-- Enable the Joint Feedback -->
+  <gazebo reference="mast_sail_joint">
+    <provideFeedback>true</provideFeedback>
+  </gazebo>
+<!-- The ft_sensor plugin -->
+  <gazebo>
+    <plugin name="ft_sensor" filename="libgazebo_ros_ft_sensor.so">
+      <updateRate>10.0</updateRate>
+      <topicName>ft_sensor_topic</topicName>
+      <jointName>mast_sail_joint</jointName>
+    </plugin>
+  </gazebo>
+</robot>
