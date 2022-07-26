@@ -2,3 +2,9 @@ mass = 27.20 kg
 Ixx = 2.275
 Iyy = 2.513
 Izz = 0.254
+
+NACA0012:
+mass = 21.03
+Ixx = 1.75
+Iyy = 2.04
+Izz = 0.29
